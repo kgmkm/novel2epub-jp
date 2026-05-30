@@ -1,0 +1,67 @@
+/* ファイル情報
+----------------------------------------------------------------
+JLREQ準拠 日本語縦書き小説 EPUB用ルール
+
+Vivliostyle theme-epub3jの縦書き設定を維持したまま、
+JLREQの字下げ、字詰め、縦中横ルールを追加適用する。
+
+注意: .vrtl クラスがルート要素に付与されていること
+（jlreq_postprocess.py が自動付与）
+---------------------------------------------------------------- */
+
+/* --- 縦書きフォールバック --- */
+.vrtl {
+  writing-mode: vertical-rl;
+}
+
+/* --- 見出しの縦書き強制 --- */
+h1, h2, h3, h4, h5, h6 {
+  -webkit-writing-mode: vertical-rl;
+  -epub-writing-mode: vertical-rl;
+  writing-mode: vertical-rl;
+}
+
+/* --- 段落の字下げ（JLREQ基本） --- */
+/*
+ * style-reset.css が text-indent: 0 でリセットするため、
+ * 全p要素に明示的に text-indent: 1em を指定する。
+ * VFM出力の section-p 構造でも確実に字下げされる。
+ */
+p {
+  text-indent: 1em;
+}
+
+/* --- 3.1.5 行頭括弧の字下げ禁止 --- */
+p.no-indent,
+li.no-indent {
+  text-indent: 0 !important;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+
+/* --- 3.2.4 縦中横（たてちゅうよこ） --- */
+.tcy {
+  -webkit-text-combine: horizontal;
+  text-combine-upright: all;
+  -epub-text-combine: horizontal;
+}
+
+/* --- 挿絵スタイル --- */
+p:has(img[src*="image/"]) {
+  text-indent: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 100%;
+  height: 100%;
+  page-break-before: always;
+  page-break-after: always;
+}
+
+img[src*="image/"] {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 100vh;
+  object-fit: contain;
+  margin: 0;
+}
