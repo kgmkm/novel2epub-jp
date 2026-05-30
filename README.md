@@ -2,6 +2,11 @@
 
 日本語縦書き小説を、しっぽり明朝埋め込みのA6文庫PDFおよびEPUBに変換するHermes Agentスキル。
 
+| EPUB（Thorium Reader） | PDF（Adobe Acrobat） |
+|:---:|:---:|
+| ![EPUB作例](image/preview_epub_thorium.webp) | ![PDF作例](image/preview_pdf_adobe_reader.webp) |
+| 『妖狐は、嗤う』第1章 | 『妖狐は、嗤う』見開き表示 |
+
 ## 機能
 
 - **PDF生成** (`build-pdf.py`)
