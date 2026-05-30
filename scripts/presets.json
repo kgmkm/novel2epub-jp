@@ -1,0 +1,63 @@
+{
+  "showcase-small": {
+    "image_size": "small",
+    "image_caption": "on",
+    "chapter_header_position": "left",
+    "chapter_header_display": "even",
+    "chapter_header_content": "book-title",
+    "page_number_position": "odd-right-even-left",
+    "page_number_display": "all"
+  },
+  "showcase-medium": {
+    "image_size": "medium",
+    "image_caption": "on",
+    "chapter_header_position": "left",
+    "chapter_header_display": "even",
+    "chapter_header_content": "book-title",
+    "page_number_position": "odd-right-even-left",
+    "page_number_display": "all"
+  },
+  "showcase-large": {
+    "image_size": "large",
+    "image_caption": "off",
+    "chapter_header_position": "left",
+    "chapter_header_display": "even",
+    "chapter_header_content": "book-title",
+    "page_number_position": "odd-right-even-left",
+    "page_number_display": "all"
+  },
+  "clean-small": {
+    "image_size": "small",
+    "image_caption": "off",
+    "chapter_header_position": "left",
+    "chapter_header_display": "even",
+    "chapter_header_content": "book-title",
+    "page_number_position": "odd-right-even-left",
+    "page_number_display": "all"
+  },
+  "clean-medium": {
+    "image_size": "medium",
+    "image_caption": "off",
+    "chapter_header_position": "left",
+    "chapter_header_display": "even",
+    "chapter_header_content": "book-title",
+    "page_number_position": "odd-right-even-left",
+    "page_number_display": "all"
+  },
+  "clean-large": {
+    "image_size": "large",
+    "image_caption": "off",
+    "chapter_header_position": "left",
+    "chapter_header_display": "even",
+    "chapter_header_content": "book-title",
+    "page_number_position": "odd-right-even-left",
+    "page_number_display": "all"
+  },
+  "minimal": {
+    "image_size": "small",
+    "image_caption": "off",
+    "chapter_header_display": "none",
+    "page_number_position": "center",
+    "page_number_display": "all"
+  }
+}

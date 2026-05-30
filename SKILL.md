@@ -39,6 +39,7 @@ tags: [novel, pdf, epub, puppeteer, pymupdf, vivliostyle, japanese]
 python3 scripts/build-pdf.py \
   --project-dir . \
   --output dist/book.pdf \
+  [--preset showcase-small|showcase-medium|showcase-large|clean-small|clean-medium|clean-large|minimal] \
   [--image-size small|medium|large] \
   [--image-caption on|off] \
   [--chapter-header-position left|center|right] \
@@ -46,6 +47,20 @@ python3 scripts/build-pdf.py \
   [--page-number-position center|left|right|odd-right-even-left|odd-left-even-right] \
   [--page-number-display all|even|odd]
 ```
+
+**プリセット一覧** (`--list-presets` で確認):
+
+| プリセット名 | 挿絵 | caption | ヘッダ | ページ番号 |
+|-------------|------|---------|--------|-----------|
+| showcase-small | 小 | on | even/left | all/交互 |
+| showcase-medium | 中 | on | even/left | all/交互 |
+| showcase-large | 大 | off | even/left | all/交互 |
+| clean-small | 小 | off | even/left | all/交互 |
+| clean-medium | 中 | off | even/left | all/交互 |
+| clean-large | 大 | off | even/left | all/交互 |
+| minimal | 小 | off | none | all/中央 |
+
+個別オプションはプリセットをオーバーライド可能。
 
 **重要制約**:
 - `image-size=large` の場合、captionは常に非表示

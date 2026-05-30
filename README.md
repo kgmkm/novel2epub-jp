@@ -43,6 +43,24 @@ fonts/
 
 ## 基本的な使い方
 
+### プリセットで素早く生成（おすすめ）
+
+```bash
+# プリセット一覧を確認
+python3 scripts/build-pdf.py --list-presets
+
+# showcase-small: 挿絵小+キャプションあり（ショーケース用）
+python3 scripts/build-pdf.py --preset showcase-small --project-dir . --output dist/book.pdf
+
+# showcase-large: 挿絵大フルブリード（迫力重視）
+python3 scripts/build-pdf.py --preset showcase-large --project-dir . --output dist/book.pdf
+
+# clean-small: 挿絵小のみ（キャプションなし）
+python3 scripts/build-pdf.py --preset clean-small --project-dir . --output dist/book.pdf
+```
+
+### 個別オプションで細かく制御
+
 ```bash
 python3 /path/to/novel2epub-jp/scripts/build-pdf.py \
   --project-dir /path/to/your-novel \
@@ -50,6 +68,25 @@ python3 /path/to/novel2epub-jp/scripts/build-pdf.py \
   --image-size large \
   --image-caption off
 ```
+
+プリセットを指定した上で、個別オプションでオーバーライドも可能：
+
+```bash
+# showcase-small のベースに caption だけ off にする
+python3 scripts/build-pdf.py --preset showcase-small --image-caption off --project-dir .
+```
+
+### プリセット一覧
+
+| プリセット名 | 挿絵サイズ | キャプション | 章ヘッダ | ページ番号 | 用途 |
+|-------------|-----------|-------------|---------|-----------|------|
+| showcase-small | 小 | on | even/左 | all/交互 | ショーケース用（挿絵小＋説明） |
+| showcase-medium | 中 | on | even/左 | all/交互 | ショーケース用（挿絵中＋説明） |
+| showcase-large | 大 | off | even/左 | all/交互 | ショーケース用（挿絵フルブリード） |
+| clean-small | 小 | off | even/左 | all/交互 | 配布用（挿絵小のみ） |
+| clean-medium | 中 | off | even/左 | all/交互 | 配布用（挿絵中のみ） |
+| clean-large | 大 | off | even/左 | all/交互 | 配布用（挿絵大のみ） |
+| minimal | 小 | off | なし | all/中央 | シンプル（ヘッダなし） |
 
 ### 主なオプション
 

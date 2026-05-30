@@ -27,7 +27,41 @@ import sys, os, argparse, subprocess, base64, glob, pathlib, json, re, io, urlli
 
 # ─── CLI ──────────────────────────────────────────────────────────
 
+SCRIPT_DIR = pathlib.Path(__file__).resolve().parent
+PRESETS_FILE = SCRIPT_DIR / "presets.json"
+
+def load_presets():
+    """Load preset definitions from presets.json."""
+    if PRESETS_FILE.is_file():
+        with open(PRESETS_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    return {}
+
+def list_presets():
+    """Print available presets and exit."""
+    presets = load_presets()
+    if not presets:
+        print("No presets found. Create presets.json next to this script.")
+        return
+    print("Available presets:\n")
+    for name, opts in presets.items():
+        desc_parts = [
+            f"image-size={opts.get('image_size', '?')}",
+            f"caption={opts.get('image_caption', '?')}",
+            f"header={opts.get('chapter_header_display', '?')}/{opts.get('chapter_header_position', '?')}",
+            f"page-num={opts.get('page_number_display', '?')}/{opts.get('page_number_position', '?')}",
+        ]
+        print(f"  {name:<20s} {', '.join(desc_parts)}")
+    print(f"\nUsage: python build-pdf.py --preset <name> --project-dir .")
+
+# Early check for --list-presets
+if "--list-presets" in sys.argv:
+    list_presets()
+    sys.exit(0)
+
 parser = argparse.ArgumentParser(description="Build PDF with Shippori Mincho")
+parser.add_argument("--preset", default=None,
+                    help="Apply preset (showcase-small, showcase-medium, showcase-large, clean-*, minimal). Use --list-presets to see all.")
 parser.add_argument("--project-dir", default=".", help="Project root")
 parser.add_argument("--output", default=None, help="Output PDF path")
 parser.add_argument("--novel-dir", default="novel", help="Novel dir name")
@@ -50,6 +84,38 @@ parser.add_argument("--image-size", choices=['small','medium','large'], default=
                     help="Image size: small(contain-fit), medium(body-width 70%%), large(cover-fill full-bleed)")
 parser.add_argument("--image-caption", choices=['on','off'], default='on',
                     help="Show image caption. Applies to small/medium only; large always hides caption.")
+
+# ── Preset application ───────────────────────────────────────────
+# Strategy: if --preset is given, load preset values as parser defaults
+# BEFORE parsing. This way individual CLI flags override preset values.
+_preset_name = None
+for i, arg in enumerate(sys.argv[1:], 1):
+    if arg == "--preset" and i < len(sys.argv) - 1:
+        _preset_name = sys.argv[i + 1]
+        break
+    elif arg.startswith("--preset="):
+        _preset_name = arg.split("=", 1)[1]
+        break
+
+if _preset_name:
+    _presets = load_presets()
+    if _preset_name not in _presets:
+        print(f"ERROR: Unknown preset '{_preset_name}'. Use --list-presets.", file=sys.stderr)
+        sys.exit(1)
+    _p = _presets[_preset_name]
+    # Map preset JSON keys → argparse dest names
+    _preset_defaults = {
+        'image_size': _p.get('image_size', 'small'),
+        'image_caption': _p.get('image_caption', 'on'),
+        'chapter_header_position': _p.get('chapter_header_position', 'right'),
+        'chapter_header_display': _p.get('chapter_header_display', 'all'),
+        'chapter_header_content': _p.get('chapter_header_content', 'book-title'),
+        'page_number_position': _p.get('page_number_position', 'center'),
+        'page_number_display': _p.get('page_number_display', 'all'),
+    }
+    parser.set_defaults(**_preset_defaults)
+    print(f"Preset applied: {_preset_name}")
+
 args = parser.parse_args()
 
 project = pathlib.Path(args.project_dir).resolve()
