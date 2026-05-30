@@ -199,6 +199,10 @@ module.exports = {
 
 ---
 
+## 関連スキル
+
+- [jlreq-skill](https://github.com/kgmkm/jlreq-skill) — W3C JLREQ（日本語組版処理の要件）のAIエージェント向けリファレンス。組版ルールの詳細はこちらを参照
+
 ## ライセンス
 
 - **スクリプト・コード**: MIT License
