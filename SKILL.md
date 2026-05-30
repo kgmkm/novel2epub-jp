@@ -7,6 +7,26 @@ tags: [novel, pdf, epub, puppeteer, pymupdf, vivliostyle, japanese]
 
 # novel2epub-jp（AI向け仕様）
 
+## 致命的禁止事項（絶対に守ること）
+
+### PDF生成: Vivliostyle CLI でのPDF出力は**完全禁止**
+
+```
+✗ vivliostyle build でPDFを生成（横書き・フォント崩壊の原因）
+✗ bunko-custom.css 等で縦書き強制を試みる（効かない）
+○ build-pdf.py（Puppeteer + PyMuPDF）でPDF生成（唯一の正解）
+```
+
+**理由**: Chromiumの `@page margin box` と `position: fixed` が `writing-mode: vertical-rl` と両立しないため、Vivliostyle CLI経由のPDFは**必ず横書きになる**（2026-05-30実証済）。フォント埋め込みも失敗する。
+
+**過去の失敗例**: 他のLLMが `vivliostyle.config.js` にPDF出力を追加し、111ページの縦書きPDF（21MB）が7.9MBの横書きPDFに化した。全ページ横書き、章ヘッダ崩壊、フォント不整合が発生。
+
+### CSS安易書き換え禁止
+
+`bunko-custom.css` の `writing-mode` 設定だけでは縦書きは強制できない。HTMLの構造（`<html lang="ja">` + `direction: rtl` + `writing-mode: vertical-rl`）と `@viewport` の両方が必要。安易なCSS書き換えはEPUB/PDF両方の組版を壊す。
+
+---
+
 ## 必須前提
 
 - 入力: `novel/*.md`（VFM記法ルビ `{漢字|よみ}` 使用）
@@ -44,6 +64,13 @@ python3 scripts/build-pdf.py \
 ```bash
 vivliostyle build   # vivliostyle.config.js が必要
 ```
+
+**EPUB必須設定**:
+- `output[].format: 'epub'` 専用テーマ: `@vivliostyle/theme-epub3j`
+- `readingProgression: 'rtl'`（縦書き右綴じ）
+- `copyAsset.includes: ['novel/image/**']`（画像埋め込み用）
+
+**注意**: `vivliostyle build` でEPUBのみ出力可能。PDF出力は必ず `build-pdf.py` を使うこと。
 
 ## ファイル
 
