@@ -120,5 +120,6 @@ python3 scripts/build-pdf.py --preset showcase-small --image-caption off --proje
 ## 関連リポジトリ
 
 - [novel2hermes_jp](https://github.com/kgmkm/novel2hermes_jp) — 執筆支援スキル（本スキルの上流）
+- [novel2epub-jp_sample](https://github.com/kgmkm/novel2epub-jp_sample) — 生成サンプル（EPUB + PDF）
 - [vfm-syntax](https://github.com/kgmkm/vfm-syntax) — VFM記法リファレンス
 - [jlreq-skill](https://github.com/kgmkm/jlreq-skill) — W3C日本語組版ルール
