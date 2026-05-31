@@ -1,6 +1,6 @@
 # VFM (Vivliostyle Flavored Markdown) 記法リファレンス
 
-> novel2epub-jp スキル用・日本語小説執筆のための完全記法ガイド
+> 日本語小説執筆のための完全記法ガイド（[vfm-syntax](https://github.com/kgmkm/vfm-syntax) スキルから複製）
 
 ---
 

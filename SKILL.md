@@ -201,6 +201,7 @@ module.exports = {
 
 ## 関連スキル
 
+- [vfm-syntax](https://github.com/kgmkm/vfm-syntax) — VFM (Vivliostyle Flavored Markdown) 記法リファレンス。Markdown原稿の記法はこちらを参照
 - [jlreq-skill](https://github.com/kgmkm/jlreq-skill) — W3C JLREQ（日本語組版処理の要件）のAIエージェント向けリファレンス。組版ルールの詳細はこちらを参照
 
 ## ライセンス
