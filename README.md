@@ -120,4 +120,5 @@ python3 scripts/build-pdf.py --preset showcase-small --image-caption off --proje
 ## 関連リポジトリ
 
 - [novel2hermes_jp](https://github.com/kgmkm/novel2hermes_jp) — 執筆支援スキル（本スキルの上流）
-- [jlreq-skill](https://github.com/kgmkm/jlreq-skill) — W3C JLREQ（日本語組版処理の要件）のAIエージェント向けリファレンス。組版ルールの詳細はこちらを参照
+- [vfm-syntax](https://github.com/kgmkm/vfm-syntax) — VFM記法リファレンス
+- [jlreq-skill](https://github.com/kgmkm/jlreq-skill) — W3C日本語組版ルール

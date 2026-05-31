@@ -195,7 +195,7 @@ module.exports = {
 | `scripts/build-epub.py` | EPUBビルド自動化スクリプト |
 | `scripts/print-pdf.cjs` | Puppeteerラッパー |
 | `templates/` | HTML/CSSテンプレート |
-| `references/` | VFM記法・CSS調整・ワークフロー |
+| `references/` | CSS調整・ワークフロー |
 
 ---
 
